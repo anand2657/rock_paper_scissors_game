@@ -1,33 +1,25 @@
-# Modular Rock-Paper-Scissors Terminal Engine
+## 📝 Project Description
 
-A highly modular command-line game application built to demonstrate pure Python control flow, function packaging, and data structure mappings.
+The **Modular Rock-Paper-Scissors Terminal Engine** is a lightweight, decoupled command-line application engineered to showcase fundamental principles of structured programming and computer science logic in Python. 
 
-## Project Architecture
-The engine consists of 5 files to preserve a strict separation of concerns:
-- `config.py`: Game rule matrices and constant fields.
-- `computr.py`: Randomized calculation engine handling opponent moves.
-- `user_input.py`: Defensive user input text/numeric validation scripts.
-- `game_logic.py`: Verification algorithms determining win/loss/tie outcomes.
-- `main.py`: Operational orchestration center running the global match loop.
+While classic text games are traditionally condensed into single, monolithic scripts, this engine serves as an architectural exercise in **Separation of Concerns (SoC)**. By isolating system configuration, input parsing, randomized movement generation, and game loop orchestration into five independent scripts, the codebase avoids "spaghetti code" and scales cleanly into a production-ready command line interface (CLI).
 
-## Setup & Execution Guide
+---
 
-### Prerequisites
-- Python 3.x installed on your operating system.
+## 🏗️ Core Architectural Modules
 
-### Running the Application
-1. Clone this public repository:
-   ```bash
-   git clone https://github.com{your-github-username}/{your-repo-name}.git
-   ```
-2. Navigate directly into the root folder:
-   ```bash
-   cd {your-repo-name}
-   ```
-3. Run the engine directly via your command terminal layout:
-   ```bash
-   python main.py
-   ```
+The engine relies on a multi-module footprint to isolate tasks and ensure clean execution paths:
 
-## Local Validation Testing
-Verifyed that all game conditions pass manually by running validation inputs (e.g., entering letters when prompted for round counts, or entering arbitrary strings instead of game options) to confirm that the error-handling loops reset gracefully.
+*   **`config.py` (Data & Rule Layer):** Establishes the immutable rules of the game. It uses a Python collection list to lock game choices (`OPTIONS`) and a structured hash-map lookup dictionary (`WINNING_PAIRS`) to map item superiorities directly.
+*   **`user_input.py` (Defensive Input Processor):** Guards runtime loops against dirty user data. It implements isolated `while True` sequences combined with structured `try-except ValueError` blocks to seamlessly capture malformed string entries or out-of-bounds numbers without crashing.
+*   **`computr.py` (Decision Automation Engine):** Drives computer behavior using standard library pseudo-random algorithms (`random.choice`). It samples choices dynamically across a uniform distribution to guarantee unbiased computer tactical moves.
+*   **`game_logic.py` (Computational Matrix Evaluator):** Eliminates messy conditional statements. Instead of nesting multiple `if-else` blocks, it evaluates winning outcomes instantly via an \(\mathcal{O}(1)\) dictionary hash lookup, updates local session registers, and outputs real-time match results.
+*   **`main.py` (Central System Orchestrator):** Controls the life cycle of the match. It links variables across modules, manages state counters, keeps scores, and runs cleanly using terminal execution workflows.
+
+---
+
+## ⚡ Key Computational Features
+
+*   **\(\mathcal{O}(1)\) Decision Matrix:** Winning determinations bypass nested branching logic, utilizing immediate key-value lookup queries on predefined rule sets.
+*   **Data Sanitization Pipe:** String entries undergo comprehensive formatting adjustments (`.lower().strip()`) to allow flexible user responses without triggering logic breaks.
+*   **Path Resolution Independent:** Employs explicit runtime search path injection (`sys.path.append`), guaranteeing smooth cross-module importing across different operating system environments and terminal consoles.
